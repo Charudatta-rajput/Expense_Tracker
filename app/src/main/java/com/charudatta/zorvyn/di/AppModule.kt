@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.charudatta.zorvyn.data.local.FinanceDatabase
 import com.charudatta.zorvyn.data.local.dao.TransactionDao
-import com.charudatta.zorvyn.data.repository.FinanceRepositoryImpl
+import com.charudatta.zorvyn.domain.repository.FinanceRepositoryImpl
 import com.charudatta.zorvyn.domain.repository.FinanceRepository
 import com.charudatta.zorvyn.domain.usecase.*
 import dagger.Module

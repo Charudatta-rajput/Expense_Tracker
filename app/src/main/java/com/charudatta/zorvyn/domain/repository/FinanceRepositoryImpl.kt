@@ -1,10 +1,9 @@
-package com.charudatta.zorvyn.data.repository
+package com.charudatta.zorvyn.domain.repository
 
 import com.charudatta.zorvyn.data.local.dao.TransactionDao
 import com.charudatta.zorvyn.data.mapper.toDomain
 import com.charudatta.zorvyn.data.mapper.toEntity
 import com.charudatta.zorvyn.domain.model.Transaction
-import com.charudatta.zorvyn.domain.repository.FinanceRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
