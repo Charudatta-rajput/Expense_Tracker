@@ -53,6 +53,8 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.room3.common.jvm)
+    implementation(libs.androidx.compose.foundation)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -69,5 +71,15 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
+
+    implementation(libs.datastore.preferences)
+
+    implementation("br.com.devsrsouza.compose.icons:feather:1.1.1")
+    implementation("com.opencsv:opencsv:5.8")
+
+    implementation("com.itextpdf:itext7-core:7.2.5")
+
+    implementation("com.google.code.gson:gson:2.10.1")
+
 
 }
