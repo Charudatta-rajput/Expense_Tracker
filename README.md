@@ -69,12 +69,9 @@ An Android application designed to track daily expenses, manage income, and prov
 
 ## Setup and Installation
 
-
-1. Clone the repository: git clone https://github.com/Charudatta-rajput/Expense_Tracker.git
-2. Open the project in Android Studio
-3. Sync Gradle
-4. Run the application on an emulator or physical device
-
 1. Clone the repository:
    ```bash
    git clone https://github.com/Charudatta-rajput/Expense_Tracker.git
+2. Open the project in Android Studio
+3. Sync Gradle
+4. Run the application on an emulator or physical device
