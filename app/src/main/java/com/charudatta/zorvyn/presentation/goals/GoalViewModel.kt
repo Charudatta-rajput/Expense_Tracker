@@ -81,7 +81,7 @@ class GoalsViewModel @Inject constructor(
                 val noSpendDays = computeNoSpendDaysThisMonth(transactions, now)
                 val newLongest  = maxOf(savedLongest, streak)
 
-                // Persist new longest streak if beaten
+
                 if (newLongest > savedLongest) {
                     goalPreferences.setLongestStreak(newLongest)
                 }
@@ -170,33 +170,33 @@ class GoalsViewModel @Inject constructor(
         val progress    = (spent / goal).toFloat()
         val remaining   = goal - spent
         val cal         = Calendar.getInstance().apply { timeInMillis = now }
-        val daysLeft    = cal.getActualMaximum(Calendar.DAY_OF_MONTH) - cal.get(Calendar.DAY_OF_MONTH)
+        val daysLeft    = cal.getActualMaximum(Calendar.DAY_OF_MONTH) - cal.get(Calendar.DAY_OF_MONTH) + 1
         val dailyBudget = if (daysLeft > 0) remaining / daysLeft else 0.0
         val dayOfMonth  = cal.get(Calendar.DAY_OF_MONTH)
 
         return when {
             progress >= DANGER_THRESHOLD ->
-                "⚠️ Budget exceeded by ₹${"%.0f".format(-remaining)}. Review your expenses." to
+                "Budget exceeded by ₹${"%.0f".format(-remaining)}. Review your expenses." to
                         InsightType.DANGER
 
             progress >= WARNING_THRESHOLD ->
-                "🔔 ₹${"%.0f".format(remaining)} left for $daysLeft days — ₹${"%.0f".format(dailyBudget)}/day" to
+                "₹${"%.0f".format(remaining)} remaining for $daysLeft days — ₹${"%.0f".format(dailyBudget)}/day" to
                         InsightType.WARNING
 
             daysLeft == 0 && progress < 0.9f ->
-                "🎉 Month complete! You saved ₹${"%.0f".format(remaining)}. Great discipline!" to
+                "Month complete! You saved ₹${"%.0f".format(remaining)}. Great discipline!" to
                         InsightType.SUCCESS
 
             streak >= 3 ->
-                "🔥 $streak day no-spend streak! ₹${"%.0f".format(remaining)} remaining" to
+                "$streak day no-spend streak! ₹${"%.0f".format(remaining)} remaining" to
                         InsightType.SUCCESS
 
             dayOfMonth > 20 && progress < 0.7f ->
-                "✨ On track to save ₹${"%.0f".format(remaining)} this month!" to
+                "On track to save ₹${"%.0f".format(remaining)} this month!" to
                         InsightType.SUCCESS
 
             else ->
-                "✅ ₹${"%.0f".format(remaining)} remaining — ₹${"%.0f".format(dailyBudget)}/day" to
+                "₹${"%.0f".format(remaining)} remaining for $daysLeft days — ₹${"%.0f".format(dailyBudget)}/day" to
                         InsightType.NEUTRAL
         }
     }

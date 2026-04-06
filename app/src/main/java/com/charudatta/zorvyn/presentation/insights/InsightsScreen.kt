@@ -80,7 +80,7 @@ fun InsightsScreen(
                 )
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
-                    // Header with icon
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -99,7 +99,7 @@ fun InsightsScreen(
                             )
                         }
 
-                        // Calculate percentage here
+
                         val totalSpent = state.categoryBreakdown.values.sum()
                         val percentage = if (totalSpent > 0)
                             (state.topCategoryAmount / totalSpent * 100).toInt()
@@ -121,7 +121,7 @@ fun InsightsScreen(
 
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    // Category name
+
                     Text(
                         text = state.topCategory,
                         fontSize = 28.sp,
@@ -132,7 +132,7 @@ fun InsightsScreen(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    // Amount row
+
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -157,7 +157,7 @@ fun InsightsScreen(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    // Progress bar
+
                     val totalSpentForBar = state.categoryBreakdown.values.sum()
                     val barPercentage = if (totalSpentForBar > 0)
                         (state.topCategoryAmount / totalSpentForBar).toFloat()
@@ -195,7 +195,7 @@ fun InsightsScreen(
                 )
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
-                    // Header with icon
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -215,7 +215,7 @@ fun InsightsScreen(
                             )
                         }
 
-                        // Trend badge
+
                         Surface(
                             shape = RoundedCornerShape(20.dp),
                             color = if (weekDiff > 0)
@@ -258,12 +258,11 @@ fun InsightsScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Weekly stats with visual bars
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        // This Week Card
+
                         EnhancedWeekStat(
                             label = "This Week",
                             amount = state.thisWeekExpense,
@@ -271,7 +270,6 @@ fun InsightsScreen(
                             modifier = Modifier.weight(1f)
                         )
 
-                        // Last Week Card
                         EnhancedWeekStat(
                             label = "Last Week",
                             amount = state.lastWeekExpense,
@@ -282,7 +280,7 @@ fun InsightsScreen(
 
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    // Insight message with emoji
+
                     Surface(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(10.dp),
@@ -299,7 +297,7 @@ fun InsightsScreen(
                         ) {
                             Text(
                                 text = when {
-                                    state.lastWeekExpense == 0.0 -> "📊"
+                                    state.lastWeekExpense == 0.0 -> "ℹ\uFE0F"
                                     weekDiff > 0 -> "⚠️"
                                     weekDiff < 0 -> "🎉"
                                     else -> "✅"
@@ -328,7 +326,7 @@ fun InsightsScreen(
             )
 
 
-            // Category breakdown
+
             if (state.categoryBreakdown.isNotEmpty()) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
@@ -431,7 +429,7 @@ fun InsightsScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        // CSV Export Button
+
                         OutlinedButton(
                             onClick = {
                                 if (!isExporting) {
@@ -452,7 +450,7 @@ fun InsightsScreen(
                             Text("CSV", fontSize = 14.sp)
                         }
 
-                        // PDF Export Button
+
                         Button(
                             onClick = {
                                 if (!isExporting) {
@@ -486,7 +484,7 @@ fun InsightsScreen(
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(80.dp))
+            Spacer(modifier = Modifier.height(5.dp))
 
 
         }
@@ -577,7 +575,6 @@ fun DailyAverageInsight(
                 .padding(20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Circular indicator
             Box(
                 modifier = Modifier.size(60.dp),
                 contentAlignment = Alignment.Center
@@ -621,7 +618,7 @@ fun DailyAverageInsight(
                 if (monthlyBudget > 0) {
                     if (isOverBudget) {
                         Text(
-                            text = "⚠️ ₹${"%.0f".format(difference)} above daily budget",
+                            text = "₹${"%.0f".format(difference)} above daily budget",
                             fontSize = 11.sp,
                             color = Color(0xFFFF5252)
                         )
@@ -632,14 +629,14 @@ fun DailyAverageInsight(
                         )
                     } else {
                         Text(
-                            text = "✨ ₹${"%.0f".format(difference)} below daily budget",
+                            text = " ₹${"%.0f".format(difference)} below daily budget",
                             fontSize = 11.sp,
                             color = Color(0xFF4CAF50)
                         )
                     }
                 } else {
                     Text(
-                        text = "💡 Set a monthly budget in Goals",
+                        text = "Set a monthly budget in Goals",
                         fontSize = 11.sp,
                         color = MaterialTheme.colorScheme.primary
                     )
@@ -668,17 +665,14 @@ fun MonthlyTrendCard(
         elevation = CardDefaults.cardElevation(2.dp)
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
-            // Header with icon and subtitle
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = "📊",
-                        fontSize = 20.sp
-                    )
+                    Text(text = "📊", fontSize = 20.sp)
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "Monthly Trend",
@@ -688,7 +682,6 @@ fun MonthlyTrendCard(
                     )
                 }
 
-                // Mini insight badge
                 Surface(
                     shape = RoundedCornerShape(20.dp),
                     color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
@@ -709,7 +702,6 @@ fun MonthlyTrendCard(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Modern Bar Chart
             val maxSpent = monthlyTrends.maxOfOrNull { it.totalSpent } ?: 1.0
 
             Row(
@@ -718,28 +710,43 @@ fun MonthlyTrendCard(
                 verticalAlignment = Alignment.Bottom
             ) {
                 monthlyTrends.forEachIndexed { index, month ->
-                    val barHeight = ((month.totalSpent / maxSpent) * 100).dp.coerceAtLeast(30.dp)
+                    val hasData = month.totalSpent > 0
+                    val barHeight = if (hasData) {
+                        ((month.totalSpent / maxSpent) * 100).dp.coerceAtLeast(30.dp)
+                    } else {
+                        30.dp // Fixed small height for no data
+                    }
+
                     val barColor = when {
-                        month.isIncrease -> Color(0xFFFF5252)
-                        month.percentageChange != null && !month.isIncrease -> Color(0xFF4CAF50)
-                        else -> MaterialTheme.colorScheme.primary
+                        hasData && month.isIncrease -> Color(0xFFFF5252)
+                        hasData && month.percentageChange != null && !month.isIncrease -> Color(0xFF4CAF50)
+                        hasData -> MaterialTheme.colorScheme.primary
+                        else -> MaterialTheme.colorScheme.surfaceVariant
                     }
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.weight(1f)
                     ) {
-                        // Amount above bar
-                        Text(
-                            text = "₹${"%.0f".format(month.totalSpent)}",
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
+                        // Amount or "No data"
+                        if (hasData) {
+                            Text(
+                                text = "₹${"%.0f".format(month.totalSpent)}",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        } else {
+                            Text(
+                                text = "No data",
+                                fontSize = 10.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
+                            )
+                        }
 
                         Spacer(modifier = Modifier.height(6.dp))
 
-                        // Bar with rounded top
+                        // Bar
                         Box(
                             modifier = Modifier
                                 .width(40.dp)
@@ -758,8 +765,8 @@ fun MonthlyTrendCard(
                             color = MaterialTheme.colorScheme.onSurface
                         )
 
-                        // Percentage change chip
-                        if (month.percentageChange != null) {
+                        // Percentage change (only if has data and not first month)
+                        if (hasData && month.percentageChange != null && index > 0) {
                             Spacer(modifier = Modifier.height(4.dp))
                             Surface(
                                 shape = RoundedCornerShape(12.dp),
@@ -792,12 +799,11 @@ fun MonthlyTrendCard(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Best & Worst Months - More visual
+            // Best & Worst Months
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                // Best Month Card
                 bestMonth?.let {
                     Card(
                         modifier = Modifier.weight(1f),
@@ -825,7 +831,7 @@ fun MonthlyTrendCard(
                                     color = MaterialTheme.colorScheme.onSurface
                                 )
                                 Text(
-                                    text = "₹${"%.0f".format(it.totalSpent)}",
+                                    text = if (it.totalSpent > 0) "₹${"%.0f".format(it.totalSpent)}" else "No data",
                                     fontSize = 11.sp,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -834,7 +840,6 @@ fun MonthlyTrendCard(
                     }
                 }
 
-                // Worst Month Card
                 worstMonth?.let {
                     Card(
                         modifier = Modifier.weight(1f),
@@ -862,7 +867,7 @@ fun MonthlyTrendCard(
                                     color = MaterialTheme.colorScheme.onSurface
                                 )
                                 Text(
-                                    text = "₹${"%.0f".format(it.totalSpent)}",
+                                    text = if (it.totalSpent > 0) "₹${"%.0f".format(it.totalSpent)}" else "No data",
                                     fontSize = 11.sp,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -871,32 +876,6 @@ fun MonthlyTrendCard(
                     }
                 }
             }
-
-            // Optional: Motivational message
-            if (monthlyTrends.lastOrNull()?.percentageChange?.let { it < -5 } == true) {
-                Spacer(modifier = Modifier.height(12.dp))
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    color = Color(0xFF4CAF50).copy(alpha = 0.08f)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(12.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Text("🎉", fontSize = 14.sp)
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = "You're spending less than last month! Keep it up!",
-                            fontSize = 11.sp,
-                            color = Color(0xFF4CAF50),
-                            fontWeight = FontWeight.Medium
-                        )
-                    }
-                }
-            }
         }
     }
 }
-

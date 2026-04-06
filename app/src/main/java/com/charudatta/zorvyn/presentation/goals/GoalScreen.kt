@@ -188,12 +188,12 @@ private fun GoalModeTabs(
         Tab(
             selected = selectedMode == GoalMode.BUDGET_TRACKER,
             onClick  = { onModeSelected(GoalMode.BUDGET_TRACKER) },
-            text     = { Text("💰 Budget") }
+            text     = { Text("Budget") }
         )
         Tab(
             selected = selectedMode == GoalMode.NO_SPEND_CHALLENGE,
             onClick  = { onModeSelected(GoalMode.NO_SPEND_CHALLENGE) },
-            text     = { Text("🔥 Challenge") }
+            text     = { Text("Challenge") }
         )
     }
 }
@@ -238,7 +238,7 @@ private fun StreakCard(
                         color      = streakColor
                     )
                     Text(
-                        text  = "Best: $longestStreak days",
+                        text  = "Best Streak: $longestStreak days",
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
                     )
@@ -304,7 +304,7 @@ private fun BudgetProgressCard(
         InsightType.NEUTRAL -> MaterialTheme.colorScheme.onSurfaceVariant
     }
 
-    // Smooth animated progress
+
     val animatedProgress by animateFloatAsState(
         targetValue   = progress,
         animationSpec = tween(durationMillis = 700, easing = FastOutSlowInEasing),
@@ -379,7 +379,7 @@ private fun BudgetProgressCard(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text  = "No budget set yet — add one below",
+                        text  = "No budget set yet add one below",
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
                     )
@@ -546,8 +546,8 @@ private fun NoSpendChallengeCard(
                     modifier = Modifier.weight(1f)
                 )
                 ChallengeStatChip(
-                    label = "No-Spend\nDays",
-                    value = "$noSpendDays this mo.",
+                    label = "No Spend Days\n   this month",
+                    value = "$noSpendDays",
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -670,7 +670,7 @@ private fun PreviewBudgetUnder() {
         BudgetProgressCard(
             spent       = 3200.0,
             goal        = 6000.0,
-            insight     = "✅ ₹2800 remaining — ₹140/day",
+            insight     = "₹2800 remaining — ₹140/day",
             insightType = InsightType.NEUTRAL
         )
     }
@@ -683,7 +683,7 @@ private fun PreviewBudgetWarning() {
         BudgetProgressCard(
             spent       = 5100.0,
             goal        = 6000.0,
-            insight     = "🔔 ₹900 left for 5 days — ₹180/day",
+            insight     = "₹900 left for 5 days — ₹180/day",
             insightType = InsightType.WARNING
         )
     }
@@ -696,7 +696,7 @@ private fun PreviewBudgetExceeded() {
         BudgetProgressCard(
             spent       = 6800.0,
             goal        = 6000.0,
-            insight     = "⚠️ Budget exceeded by ₹800. Review your expenses.",
+            insight     = "Budget exceeded by ₹800. Review your expenses.",
             insightType = InsightType.DANGER
         )
     }

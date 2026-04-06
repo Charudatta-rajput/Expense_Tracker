@@ -21,7 +21,7 @@ import java.util.*
 
 class ExportHelper(private val context: Context) {
 
-    private val dateFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
+
 
     fun exportToCSV(content: String, fileName: String): File? {
         return try {
@@ -43,22 +43,22 @@ class ExportHelper(private val context: Context) {
         fileName: String
     ): File? {
         return try {
-            // Create PDF file in cache
+
             val pdfFile = File(context.cacheDir, "$fileName.pdf")
 
-            // Initialize PDF writer and document
+
             val pdfWriter = PdfWriter(pdfFile)
             val pdfDocument = PdfDocument(pdfWriter)
             val document = Document(pdfDocument)
 
-            // Add title
+
             val title = Paragraph("Zorvyn Transaction Report")
                 .setFontSize(18f)
                 .setBold()
                 .setTextAlignment(TextAlignment.CENTER)
             document.add(title)
 
-            // Add generation date
+
             val datePara = Paragraph("Generated on: ${SimpleDateFormat("MMM dd, yyyy HH:mm:ss", Locale.getDefault()).format(Date())}")
                 .setFontSize(10f)
                 .setTextAlignment(TextAlignment.CENTER)
@@ -66,7 +66,7 @@ class ExportHelper(private val context: Context) {
 
             document.add(Paragraph("\n"))
 
-            // Add Summary Section
+
             val summaryTitle = Paragraph("SUMMARY")
                 .setFontSize(14f)
                 .setBold()
@@ -74,7 +74,7 @@ class ExportHelper(private val context: Context) {
 
             document.add(Paragraph("\n"))
 
-            // Create summary table (2 columns)
+
             val summaryTable = Table(UnitValue.createPercentArray(floatArrayOf(40f, 60f)))
                 .useAllAvailableWidth()
 
@@ -99,7 +99,7 @@ class ExportHelper(private val context: Context) {
             document.add(summaryTable)
             document.add(Paragraph("\n"))
 
-            // Add Transactions Section
+
             val transactionsTitle = Paragraph("TRANSACTIONS")
                 .setFontSize(14f)
                 .setBold()
@@ -107,17 +107,15 @@ class ExportHelper(private val context: Context) {
 
             document.add(Paragraph("\n"))
 
-            // Create transactions table
+
             val table = Table(UnitValue.createPercentArray(floatArrayOf(15f, 10f, 15f, 15f, 30f, 15f)))
                 .useAllAvailableWidth()
 
-            // Add headers
             val headers = listOf("Date", "Type", "Category", "Amount", "Note", "ID")
             headers.forEach { header ->
                 table.addCell(Cell().add(Paragraph(header).setBold()))
             }
 
-            // Add data rows (limit to 50 for readability)
             val displayDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             transactions.sortedByDescending { it.date }.take(50).forEach { transaction ->
                 table.addCell(displayDateFormat.format(Date(transaction.date)))
@@ -130,11 +128,9 @@ class ExportHelper(private val context: Context) {
 
             document.add(table)
 
-            // Close document
             document.close()
             pdfDocument.close()
 
-            // Save to downloads folder
             val finalFile = savePdfToDownloads(pdfFile, fileName)
             finalFile
 

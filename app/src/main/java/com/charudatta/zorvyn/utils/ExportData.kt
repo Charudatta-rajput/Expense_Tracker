@@ -23,10 +23,10 @@ object ExportDataGenerator {
     fun generateCSV(transactions: List<Transaction>, summary: ExportSummary): String {
         val stringBuilder = StringBuilder()
 
-        // Add header
+
         stringBuilder.append("Date,Type,Category,Amount,Note,Transaction ID\n")
 
-        // Add transactions
+
         transactions.sortedByDescending { it.date }.forEach { transaction ->
             stringBuilder.append("${dateFormat.format(Date(transaction.date))},")
             stringBuilder.append("${transaction.type},")
@@ -36,7 +36,7 @@ object ExportDataGenerator {
             stringBuilder.append("${transaction.id}\n")
         }
 
-        // Add summary section
+
         stringBuilder.append("\n\n--- SUMMARY ---\n")
         stringBuilder.append("Period,${summary.periodStart} to ${summary.periodEnd}\n")
         stringBuilder.append("Total Income,₹${"%.2f".format(summary.totalIncome)}\n")

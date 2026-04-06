@@ -43,33 +43,33 @@ data class InsightsState(
 @HiltViewModel
 class InsightsViewModel @Inject constructor(
     private val getTransactions: GetTransactionsUseCase,
-    private val goalPreferences: GoalPreferences  // Add this injection
+    private val goalPreferences: GoalPreferences
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(InsightsState())
     val state: StateFlow<InsightsState> = _state
 
     init {
-        // Load monthly budget from preferences
+
         viewModelScope.launch {
             goalPreferences.monthlyGoal.collect { budget ->
                 _state.update { it.copy(monthlyBudget = budget) }
             }
         }
 
-        // Load transactions
+
         viewModelScope.launch {
             getTransactions().collect { transactions ->
                 val expenses = transactions.filter { it.type == "expense" }
 
-                // Category breakdown
+
                 val breakdown = expenses
                     .groupBy { it.category }
                     .mapValues { e -> e.value.sumOf { it.amount } }
 
                 val topEntry = breakdown.maxByOrNull { it.value }
 
-                // This week vs last week
+
                 val now = Calendar.getInstance()
                 val startOfWeek = now.clone() as Calendar
                 startOfWeek.set(Calendar.DAY_OF_WEEK, startOfWeek.firstDayOfWeek)
@@ -90,7 +90,7 @@ class InsightsViewModel @Inject constructor(
                     .filter { it.date >= startOfLastWeek.timeInMillis && it.date < startOfWeek.timeInMillis }
                     .sumOf { it.amount }
 
-                // Calculate monthly trends
+
                 val monthlyTrends = calculateMonthlyTrends(expenses)
                 val bestMonth = monthlyTrends.minByOrNull { it.totalSpent }
                 val worstMonth = monthlyTrends.maxByOrNull { it.totalSpent }
@@ -124,11 +124,10 @@ class InsightsViewModel @Inject constructor(
     }
 
 
-    // Add this function inside InsightsViewModel class
     fun exportTransactions(context: Context, format: String) {
         viewModelScope.launch {
             try {
-                // Get all transactions
+
                 val transactions = getTransactions().first()
                 val expenses = transactions.filter { it.type == "expense" }
                 val incomes = transactions.filter { it.type == "income" }
@@ -143,11 +142,11 @@ class InsightsViewModel @Inject constructor(
                 val totalExpense = expenses.sumOf { it.amount }
                 val totalIncome = incomes.sumOf { it.amount }
 
-                // Get top category
+
                 val topCategory = expenses.groupBy { it.category }
                     .maxByOrNull { it.value.sumOf { t -> t.amount } }
 
-                // Get date range
+
                 val oldestDate = transactions.minByOrNull { it.date }?.date ?: System.currentTimeMillis()
                 val newestDate = transactions.maxByOrNull { it.date }?.date ?: System.currentTimeMillis()
                 val dateFormat = java.text.SimpleDateFormat("MMM dd, yyyy", java.util.Locale.getDefault())
@@ -202,7 +201,7 @@ private fun calculateMonthlyTrends(expenses: List<Transaction>): List<MonthlyDat
     val months = mutableListOf<MonthlyData>()
     val monthNames = listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
-    // Get last 3 months
+
     for (i in 2 downTo 0) {
         var month = currentMonth - i
         var year = currentYear
@@ -225,7 +224,7 @@ private fun calculateMonthlyTrends(expenses: List<Transaction>): List<MonthlyDat
         )
     }
 
-    // Add percentage changes
+
     return months.mapIndexed { index, data ->
         val previousMonth = months.getOrNull(index - 1)
         val percentageChange = if (previousMonth != null && previousMonth.totalSpent > 0) {

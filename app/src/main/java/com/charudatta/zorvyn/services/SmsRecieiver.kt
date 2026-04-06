@@ -13,25 +13,24 @@ import android.provider.Telephony
 import androidx.annotation.RequiresPermission
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.charudatta.zorvyn.R
-import com.charudatta.zorvyn.utils.SmsTransactionParser
 import com.charudatta.zorvyn.utils.DetectedTransaction
+import com.charudatta.zorvyn.utils.SmsTransactionParser
 
 class SmsReceiver : BroadcastReceiver() {
 
     @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
     override fun onReceive(context: Context, intent: Intent) {
-        // Check if the action is SMS_RECEIVED
+
         if (intent.action != Telephony.Sms.Intents.SMS_RECEIVED_ACTION) return
 
-        // Get the SMS messages from the intent
+
         val messages = Telephony.Sms.Intents.getMessagesFromIntent(intent)
 
         for (sms in messages) {
             val body = sms.messageBody ?: continue
             val sender = sms.originatingAddress ?: ""
 
-            // Only process SMS from likely bank senders
+
             if (!looksLikeBank(sender) && !looksLikeBank(body)) continue
 
             val detected = SmsTransactionParser.parse(body) ?: continue
@@ -40,7 +39,7 @@ class SmsReceiver : BroadcastReceiver() {
         }
     }
 
-    // Heuristic: bank sender IDs are usually uppercase like "HDFCBK", "ICICIB", "PAYTMB"
+
     private fun looksLikeBank(sender: String): Boolean {
         val upper = sender.uppercase()
         return upper.contains("BANK") ||
@@ -67,7 +66,7 @@ class SmsReceiver : BroadcastReceiver() {
             ?.let { "₹${"%.0f".format(tx.amount)} $typeLabel at $it — tap to log it" }
             ?: "₹${"%.0f".format(tx.amount)} $typeLabel — tap to log it"
 
-        // Deep link into AddTransaction screen with pre-filled args
+
         val deepLinkUri = Uri.parse("zorvyn://add").buildUpon()
             .appendQueryParameter("amount", tx.amount.toString())
             .appendQueryParameter("type", tx.type)

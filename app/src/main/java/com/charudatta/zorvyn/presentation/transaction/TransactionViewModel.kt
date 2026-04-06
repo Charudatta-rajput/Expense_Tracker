@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 data class TransactionsState(
     val transactions: List<Transaction> = emptyList(),
-    val filter: String = "all" // "all", "income", "expense"
+    val filter: String = "all"
 )
 
 @HiltViewModel

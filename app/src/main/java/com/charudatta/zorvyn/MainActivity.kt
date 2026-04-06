@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
 import com.charudatta.zorvyn.presentation.navigation.NavGraph
 import com.charudatta.zorvyn.ui.theme.ZorvynTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,22 +14,17 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    // Modern permission launcher
+
     private val smsPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
-        val smsGranted = permissions[Manifest.permission.RECEIVE_SMS] ?: false
-        val readGranted = permissions[Manifest.permission.READ_SMS] ?: false
 
-        if (smsGranted && readGranted) {
-            // SMS permission granted - receiver will work
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Request SMS permission
+
         requestSmsPermissions()
 
         setContent {

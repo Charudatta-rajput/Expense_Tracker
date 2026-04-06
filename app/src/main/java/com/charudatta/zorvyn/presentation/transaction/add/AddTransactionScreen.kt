@@ -34,16 +34,16 @@ fun AddTransactionScreen(
     preFilledAmount: String = "",
     preFilledType: String = "expense",
     preFilledCategory: String = "",
+    preFilledNote: String = "",
     viewModel: AddTransactionViewModel = hiltViewModel()
 ) {
     var amount by remember(preFilledAmount) { mutableStateOf(preFilledAmount) }
     var selectedCategory by remember(preFilledCategory) { mutableStateOf(preFilledCategory) }
     var customCategory by remember { mutableStateOf("") }
-    var note by remember { mutableStateOf("") }
+    var note by remember(preFilledNote) { mutableStateOf(preFilledNote) }
     var type by remember(preFilledType) { mutableStateOf(preFilledType) }
     var showCustomCategory by remember { mutableStateOf(false) }
 
-    // If pre-filled category doesn't match predefined ones, show custom category
     val predefinedCategories = if (type == "expense") {
         listOf("Food", "Transport", "Shopping", "Entertainment", "Bills", "Health", "Education")
     } else {
@@ -65,7 +65,7 @@ fun AddTransactionScreen(
     var amountError by remember { mutableStateOf(false) }
     var categoryError by remember { mutableStateOf(false) }
 
-    // Predefined categories
+
     val expenseCategories = listOf(
         CategoryItem("Food", "🍔", FeatherIcons.Coffee, Color(0xFFFF6B6B)),
         CategoryItem("Transport", "🚗", FeatherIcons.Truck, Color(0xFF4ECDC4)),
@@ -123,7 +123,7 @@ fun AddTransactionScreen(
         ) {
             Spacer(modifier = Modifier.height(8.dp))
 
-// Transaction Type Toggle
+
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(12.dp),
@@ -135,7 +135,7 @@ fun AddTransactionScreen(
                         .padding(4.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    // Expense Button
+
                     Button(
                         onClick = { type = "expense" },
                         modifier = Modifier
@@ -155,7 +155,7 @@ fun AddTransactionScreen(
                         }
                     }
 
-                    // Income Button
+
                     Button(
                         onClick = { type = "income" },
                         modifier = Modifier
@@ -177,7 +177,7 @@ fun AddTransactionScreen(
                 }
             }
 
-            // Amount Field (Compact)
+
             OutlinedTextField(
                 value = amount,
                 onValueChange = {
@@ -209,7 +209,6 @@ fun AddTransactionScreen(
                 )
             )
 
-            // Category Section
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Text(
                     text = "Category",
@@ -218,7 +217,7 @@ fun AddTransactionScreen(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
-                // Category Chips
+
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier.fillMaxWidth()
@@ -248,7 +247,7 @@ fun AddTransactionScreen(
                     }
                 }
 
-                // Custom Category Input
+
                 if (showCustomCategory) {
                     OutlinedTextField(
                         value = customCategory,
@@ -273,7 +272,7 @@ fun AddTransactionScreen(
                 }
             }
 
-            // Note Field (Compact)
+
             OutlinedTextField(
                 value = note,
                 onValueChange = { note = it },
@@ -293,7 +292,7 @@ fun AddTransactionScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Save Button
+
             Button(
                 onClick = {
                     var isValid = true

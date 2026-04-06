@@ -64,7 +64,6 @@ fun HomeScreen(
         ) {
 
 
-            // Header with date
             item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -111,21 +110,18 @@ fun HomeScreen(
                 )
             }
 
-            // Spending Chart (Visual Element)
             if (state.transactions.isNotEmpty()) {
                 item {
                     SpendingChart(transactions = state.transactions)
                 }
             }
 
-            // Category Breakdown with Pie Chart style
             if (state.transactions.isNotEmpty()) {
                 item {
                     CategoryBreakdown(transactions = state.transactions)
                 }
             }
 
-            // Recent Transactions Header with View All button
             item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -220,7 +216,7 @@ fun BalanceCard(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                // Monthly Budget Progress
+
                 if (monthlyGoal > 0) {
                     Column {
                         Row(
@@ -254,7 +250,7 @@ fun BalanceCard(
                             trackColor = Color.White.copy(alpha = 0.3f)
                         )
 
-                        // Show remaining or over budget amount
+
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = if (isOverBudget)
@@ -342,7 +338,7 @@ fun SpendingChart(transactions: List<Transaction>) {
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
-            // Header
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -374,7 +370,7 @@ fun SpendingChart(transactions: List<Transaction>) {
                 val maxSpend = weeklyData.maxOfOrNull { it.second } ?: 1.0
                 val avgSpend = weeklyData.map { it.second }.average()
 
-                // Bars
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly,
@@ -387,7 +383,7 @@ fun SpendingChart(transactions: List<Transaction>) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            // Amount
+
                             Text(
                                 text = "₹${amount.toInt()}",
                                 fontSize = 11.sp,
@@ -400,7 +396,7 @@ fun SpendingChart(transactions: List<Transaction>) {
 
                             Spacer(modifier = Modifier.height(6.dp))
 
-                            // Bar
+
                             Box(
                                 modifier = Modifier
                                     .width(32.dp)
@@ -416,7 +412,7 @@ fun SpendingChart(transactions: List<Transaction>) {
 
                             Spacer(modifier = Modifier.height(8.dp))
 
-                            // Day
+
                             Text(
                                 text = day.take(3),
                                 fontSize = 12.sp,
@@ -429,7 +425,7 @@ fun SpendingChart(transactions: List<Transaction>) {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Average line
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
@@ -448,7 +444,7 @@ fun SpendingChart(transactions: List<Transaction>) {
                     )
                 }
             } else {
-                // Empty state
+
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -509,7 +505,7 @@ fun CategoryBreakdown(transactions: List<Transaction>) {
             )
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Donut-style progress indicators
+
             categoryTotals.forEachIndexed { index, entry ->
                 val percentage = (entry.value / total * 100).toInt()
                 Column(modifier = Modifier.padding(vertical = 6.dp)) {
@@ -678,7 +674,7 @@ fun EmptyState() {
     }
 }
 
-// Helper functions
+
 fun getGreeting(): String {
     val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     return when (hour) {

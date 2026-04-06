@@ -49,12 +49,11 @@ fun NavGraph() {
                 InsightsScreen(navController)
             }
 
-            // Normal Add Transaction (without pre-filled data)
+
             composable(Screen.AddTransaction.route) {
                 AddTransactionScreen(navController)
             }
 
-            // Deep link route for SMS detection (with pre-filled data)
             composable(
                 route = "add_transaction_sms?amount={amount}&type={type}&note={note}",
                 arguments = listOf(
@@ -75,18 +74,20 @@ fun NavGraph() {
                     }
                 ),
                 deepLinks = listOf(
-                    navDeepLink { uriPattern = "zorvyn://add" }
+                    navDeepLink {
+                        uriPattern = "zorvyn://add?amount={amount}&type={type}&note={note}" // ← FIX 1
+                    }
                 )
             ) { backStackEntry ->
                 val amount = backStackEntry.arguments?.getString("amount") ?: ""
-                val type = backStackEntry.arguments?.getString("type") ?: "expense"
-                val note = backStackEntry.arguments?.getString("note") ?: ""
+                val type   = backStackEntry.arguments?.getString("type")   ?: "expense"
+                val note   = backStackEntry.arguments?.getString("note")   ?: ""
 
                 AddTransactionScreen(
-                    navController = navController,
+                    navController   = navController,
                     preFilledAmount = amount,
-                    preFilledType = type,
-                    preFilledCategory = note
+                    preFilledType   = type,
+                    preFilledNote   = note
                 )
             }
         }

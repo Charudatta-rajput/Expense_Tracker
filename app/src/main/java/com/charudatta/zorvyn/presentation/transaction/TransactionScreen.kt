@@ -60,7 +60,7 @@ fun TransactionsScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Filter chips
+
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf("all", "income", "expense").forEach { filter ->
                     FilterChip(
@@ -152,7 +152,7 @@ fun TransactionRow(
                 .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Icon
+
             Box(
                 modifier = Modifier
                     .size(42.dp)
@@ -171,7 +171,7 @@ fun TransactionRow(
 
             Spacer(modifier = Modifier.width(12.dp))
 
-            // Info
+
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = transaction.category,
@@ -191,7 +191,7 @@ fun TransactionRow(
                 )
             }
 
-            // Amount
+
             Text(
                 text = amountText,
                 fontSize = 14.sp,
@@ -201,7 +201,7 @@ fun TransactionRow(
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            // Delete
+
             IconButton(onClick = { showConfirm = true }) {
                 Icon(
                     Icons.Filled.Delete,
