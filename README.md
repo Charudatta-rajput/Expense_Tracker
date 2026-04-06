@@ -79,21 +79,25 @@ An Android application designed to track daily expenses, manage income, and prov
 
 ## 📱 Screenshots
 
+### 🏠 Home Screen
 <p align="center">
+   <img src="https://github.com/user-attachments/assets/68d75a42-a121-4554-bdba-06de449ad0e6" width="250"/>
   <img src="https://github.com/user-attachments/assets/3d20b3da-0fea-4e1e-aaf6-1cdf092143a9" width="250"/>
-  <img src="https://github.com/user-attachments/assets/68d75a42-a121-4554-bdba-06de449ad0e6" width="250"/>
 </p>
 
+### 💸 Transactions
 <p align="center">
   <img src="https://github.com/user-attachments/assets/12d65b53-9bb1-402b-8f72-0c04541a84fe" width="250"/>
   <img src="https://github.com/user-attachments/assets/2c76f9a5-adb7-453b-a48a-7bcb9a6767a6" width="250"/>
 </p>
 
+### 🎯 Goals
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5502b861-29f2-48b3-b04a-c9111f64f9f9" width="250"/>
   <img src="https://github.com/user-attachments/assets/e2c1c108-3348-446f-b103-af31dbee9d14" width="250"/>
 </p>
 
+### 📊 Insights
 <p align="center">
   <img src="https://github.com/user-attachments/assets/30772edf-4a8a-4261-b80f-0374536f1e05" width="250"/>
   <img src="https://github.com/user-attachments/assets/bb548d6b-beab-4142-a93f-bcce1833fe65" width="250"/>
